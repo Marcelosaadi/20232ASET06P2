@@ -16,7 +16,28 @@ describe('[Encontrar aliquota IRRF]', () => {
 });
 
 
+
+
 describe('[Calcular desconto IRRF]', () => {
-   
-    
+    test('deve calcular o desconto corretamente', () => {
+        const salarioBase = 2722.61;
+        const faixas = irrf.obterFaixas();
+
+        let resultado = 0;
+
+        for (let i = 0; i < faixas.length; i++) {
+            const faixaAtual = faixas[i];
+
+            if (irrf.faixaContemplaValor(salarioBase, faixaAtual)) {
+                const descontoFaixa = irrf.calcularDescontoFaixa(salarioBase, faixaAtual);
+                resultado = Math.round(descontoFaixa * 100) / 100;
+                break; 
+            }
+        }
+
+        const resultadoEsperado = 45.80;
+
+        expect(resultado).toEqual(resultadoEsperado);
+    });
 });
+
