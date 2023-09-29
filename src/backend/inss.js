@@ -14,7 +14,12 @@ module.exports = {
     },
 
     calcularDescontoFaixa: function (faixa) {
-       
+        if (faixa) {
+            const totalFaixa = (faixa.fimFaixa - faixa.inicioFaixa) * faixa.aliquota;
+            return totalFaixa;
+        } else {
+            return 0;
+        }
     },
 
     calcularDescontoResidual: function (salarioBruto, faixaAnterior, faixaAtual) {
